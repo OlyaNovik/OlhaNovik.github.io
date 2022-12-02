@@ -1,0 +1,33 @@
+@import '../../style/variables.scss';
+
+.header{
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    background-color: $color_green;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Link_block{
+    margin-right: 50px;
+    font-size: 25px;
+    width: 300px;
+    display: flex;
+    justify-content: space-around;
+    a{
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+    }
+    a:hover{
+        font-size: 30px;
+        color: rgb(255, 255, 255);
+    }
+}
+
+.avatar{
+    margin-left: 50px;
+    fill: white;
+    width: 100px;
+    height: 100px;
+}
