@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/OlhaNovik.github.io/static/css/main.073c9b0a.css",
+    "main.js": "/OlhaNovik.github.io/static/js/main.afc010d4.js",
+    "index.html": "/OlhaNovik.github.io/index.html",
+    "main.073c9b0a.css.map": "/OlhaNovik.github.io/static/css/main.073c9b0a.css.map",
+    "main.afc010d4.js.map": "/OlhaNovik.github.io/static/js/main.afc010d4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.afc010d4.js"
+  ]
+}
