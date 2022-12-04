@@ -1,7 +1,8 @@
 @import '../../style/variables.scss';
 
 .header{
-    width: 100%;
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 80px;
     height: 80px;
     padding: 10px;
     background-color: $color_green;
@@ -10,18 +11,25 @@
 }
 
 .Link_block{
-    margin-right: 50px;
-    font-size: 25px;
+    margin:20px 50px 0 0;
+    font-size: 35px;
+    font-weight: 300;
     width: 300px;
     display: flex;
     justify-content: space-around;
+    p{
+        text-align: center;
+    }
     a{
         color: rgb(0, 0, 0);
         text-decoration: none;
     }
     a:hover{
-        font-size: 30px;
-        color: rgb(255, 255, 255);
+        font-size: 40px;
+        color: white;
+    }
+    a:focus{
+        color: white;
     }
 }
 

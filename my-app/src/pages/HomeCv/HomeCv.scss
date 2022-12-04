@@ -24,6 +24,7 @@ p{
         z-index: 1;
         width: 235px;
         height: 380px;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     }
 }
 .headerCv{
@@ -31,7 +32,7 @@ p{
     top: 80px;
     width: 100%;
     height: 230px;
-    background-color: rgb(180, 161, 138);
+    background-color: rgb(137, 130, 121);
     .title_Haeder{
         width: 450px;
         display: flex;
@@ -95,10 +96,14 @@ p{
 }
 .s1{
     margin-bottom: 15px;
-    color: rgb(236, 205, 138);
+    color: rgb(137, 130, 121);
     font-style: italic;
     @include title(17px,700)
 }
 .text_o{
     margin: 10px 0 10px 0;
 }
+
+
+
+
