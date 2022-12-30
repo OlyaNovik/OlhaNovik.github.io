@@ -1,5 +1,9 @@
 import "./HomeCv.scss"
 import Cv_photo from "../../Image/Cv_photo.jpg"
+
+
+
+
 const Home = () => {
  
   const skills = ['Confident knowledge of HTML5, CSS3/SASS, experience in  adaptive and cross-browser layout',
@@ -8,7 +12,7 @@ const Home = () => {
   'Knowledge of React',
   'Understanding Redux',
   'English language skills: pre-intermediate(in progress)']
-  const contact = ['Phone number: +38 (097) 103 32 17','Phone number: +38 (097) 103 32 17','LinkedIn: https://www.linkedin.com/in/olha-novik-1b3b33248']
+  const contact = ['Phone number: +38 (097) 103 32 17','Email: olyaanovikk@gmail.com','LinkedIn: https://www.linkedin.com/in/olha-novik-1b3b33248']
 
 
   return (
@@ -36,7 +40,7 @@ const Home = () => {
           </div>
           <div className="contact">
              <p className="s2" >CONTACT INFORMATION</p>
-             {contact.map((el,index)=> <li className="list" key={el}>{el}</li>)}
+             {contact.map((el,index)=> <li className="list" key={el+index}>{el}</li>)}
           </div>
           <div className="education">
             <p className="s2">EDUCATION</p>
@@ -48,7 +52,7 @@ const Home = () => {
             </div>
             <div className="course">
               <p className="s1" >LOGOS IT ACADEMY</p>
-              <p lassName="s1" >PRACTICAL COURSE OF WEB DEVELOPMENT</p>
+              <p className="s1" >PRACTICAL COURSE OF WEB DEVELOPMENT</p>
               <p className="text_o" >6-month web development course, namely Front-end Developer.</p>
             </div>
             </div>
