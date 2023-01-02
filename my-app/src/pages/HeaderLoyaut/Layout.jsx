@@ -13,7 +13,8 @@ const Layout = () => {
       </div>
       <div className="Link_block">
      <p><Link to="/">Home</Link></p> 
-     <p><Link to="/contact">Login</Link></p> 
+     <p><Link to="/signup">SignUp</Link></p> 
+     {/* <p><Link to="/login">Login</Link></p>  */}
       </div>
     </div>
       <Outlet />
