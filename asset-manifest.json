@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/OlhaNovik.github.io/static/css/main.71d075f3.css",
-    "main.js": "/OlhaNovik.github.io/static/js/main.4b228ed4.js",
+    "main.js": "/OlhaNovik.github.io/static/js/main.fd05138d.js",
     "static/media/Cv_photo.jpg": "/OlhaNovik.github.io/static/media/Cv_photo.48d286511cb788feadc5.jpg",
     "static/media/hacker.png": "/OlhaNovik.github.io/static/media/hacker.8722ca4b7ed9fbc19cc8.png",
     "index.html": "/OlhaNovik.github.io/index.html",
     "main.71d075f3.css.map": "/OlhaNovik.github.io/static/css/main.71d075f3.css.map",
-    "main.4b228ed4.js.map": "/OlhaNovik.github.io/static/js/main.4b228ed4.js.map"
+    "main.fd05138d.js.map": "/OlhaNovik.github.io/static/js/main.fd05138d.js.map"
   },
   "entrypoints": [
     "static/css/main.71d075f3.css",
-    "static/js/main.4b228ed4.js"
+    "static/js/main.fd05138d.js"
   ]
 }
