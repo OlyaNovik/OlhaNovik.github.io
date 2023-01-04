@@ -2,17 +2,17 @@ import "./HomeCv.scss"
 import Cv_photo from "../../Image/Cv_photo.jpg"
 
 
-
-
 const Home = () => {
- 
+
   const skills = ['Confident knowledge of HTML5, CSS3/SASS, experience in  adaptive and cross-browser layout',
-  'Knowledge of Javascript and ES6+',
-  'Understanding and ability to work with Bootstrap',
-  'Knowledge of React',
-  'Understanding Redux',
-  'English language skills: pre-intermediate(in progress)']
-  const contact = ['Phone number: +38 (097) 103 32 17','Email: olyaanovikk@gmail.com','LinkedIn: https://www.linkedin.com/in/olha-novik-1b3b33248']
+    'Knowledge of Javascript and ES6+',
+    'Understanding and ability to work with Bootstrap',
+    'Knowledge of React',
+    'Understanding Redux',
+    'English language skills: pre-intermediate(in progress)']
+  const contact = ['Phone number: +38 (097) 103 32 17', 'Email: olyaanovikk@gmail.com', 'LinkedIn: https://www.linkedin.com/in/olha-novik-1b3b33248']
+  
+  
 
 
   return (
@@ -32,29 +32,29 @@ const Home = () => {
         <div className="main_Cv">
           <div className="skills">
             <p className="s2">Skills</p>
-            {skills.map((el,index)=> <li className="list" key={index+el}>{el}</li>)}
+            {skills.map((el, index) => <li className="list" key={index + el}>{el}</li>)}
           </div>
           <div className="experience">
             <p className="s2">WORK EXPERIENCE</p>
             <li>6-month FrontEnd course in It Logos Academy</li>
           </div>
           <div className="contact">
-             <p className="s2" >CONTACT INFORMATION</p>
-             {contact.map((el,index)=> <li className="list" key={el+index}>{el}</li>)}
+            <p className="s2" >CONTACT INFORMATION</p>
+            {contact.map((el, index) => <li className="list" key={el + index}>{el}</li>)}
           </div>
           <div className="education">
             <p className="s2">EDUCATION</p>
             <div className="univ_bl">
-            <div className="univ">
-              <p className="s1">LVIV IVAN FRANKO NATIONAL UNIVERSITY</p>
-              <p>CURRENT EDUCATIONAL ESTABLISHMENT</p>
-              <p className="text_o">Faculty of Electronics and Computer Sciences. Specialization Computer science.</p>
-            </div>
-            <div className="course">
-              <p className="s1" >LOGOS IT ACADEMY</p>
-              <p className="s1" >PRACTICAL COURSE OF WEB DEVELOPMENT</p>
-              <p className="text_o" >6-month web development course, namely Front-end Developer.</p>
-            </div>
+              <div className="univ">
+                <p className="s1">LVIV IVAN FRANKO NATIONAL UNIVERSITY</p>
+                <p>CURRENT EDUCATIONAL ESTABLISHMENT</p>
+                <p className="text_o">Faculty of Electronics and Computer Sciences. Specialization Computer science.</p>
+              </div>
+              <div className="course">
+                <p className="s1" >LOGOS IT ACADEMY</p>
+                <p className="s1" >PRACTICAL COURSE OF WEB DEVELOPMENT</p>
+                <p className="text_o" >6-month web development course, namely Front-end Developer.</p>
+              </div>
             </div>
           </div>
         </div>

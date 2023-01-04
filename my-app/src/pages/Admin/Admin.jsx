@@ -1,6 +1,10 @@
 import "../HomeCv/HomeCv.scss"
 import Cv_photo from "../../Image/Cv_photo.jpg"
-
+import db, { storage } from "../../Firebase"
+import { addDoc, collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { useState } from "react";
+import { async } from "@firebase/util";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const Admin = () => {
    const skills = ['Confident knowledge of HTML5, CSS3/SASS, experience in  adaptive and cross-browser layout',
@@ -11,9 +15,61 @@ const Admin = () => {
         'English language skills: pre-intermediate(in progress)']
         const contact = ['Phone number: +38 (097) 103 32 17','Email: olyaanovikk@gmail.com','LinkedIn: https://www.linkedin.com/in/olha-novik-1b3b33248']
      
+const [user, setUser] = useState([])
+  const collectionRef = collection(db, 'info')
+
+
+
+  const addInfo = async () => {
+    try {
+      const docRef = await addDoc(collectionRef, {})
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+  const getInfo = () => {
+    onSnapshot(collectionRef, (snapshot) => {
+      setUser(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
+    })
+  }
+  const deleteUser = async (userId) => {
+    const DocRef = doc(db, collectionRef, userId)
+    try {
+      await deleteDoc(DocRef)
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+         
+  const EditUser = async (userId) => {
+    const DocRef = doc(db, collectionRef, userId)
+    try {
+      await setDoc(DocRef, )
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+   const handleUpload = (e)=>{
+      const StorageRef = ref(storage,`/images/${e.target.files[0].name}`)
+      const  uploadData = uploadBytesResumable(StorageRef, e.target.files[0])
+      uploadData.on("state_changed",(snapshot)=>{
+        const PROG = ((snapshot.bytesTransferred/snapshot.totalBytes)*100)
+        console.log(PROG);
+      },(err)=> console.log(err),()=>{
+        getDownloadURL(uploadData.snapshot.ref)
+        .then(url=> console.log(url))
+      })
+    
+    }
+
         return (
           <div className="globalBlock">
-            <div className="Cv">
+
+          <input type="file" onChange={handleUpload} />
+            {/* <div className="Cv">
               <img className="img_av" src={Cv_photo} alt="#" />
               <div className="headerCv">
                 <div className="title_Haeder">
@@ -54,7 +110,7 @@ const Admin = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
       
     )
