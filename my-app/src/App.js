@@ -9,8 +9,6 @@ import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   const admin = localStorage.getItem('user');
-  console.log(admin?.user?.uid);
-  console.log('clfdcecl');
   return (
     <div className="App">
      <BrowserRouter>
