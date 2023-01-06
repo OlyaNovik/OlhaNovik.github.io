@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.5db727e4.css",
-    "main.js": "/static/js/main.44f05885.js",
-    "static/media/Cv_photo.jpg": "/static/media/Cv_photo.48d286511cb788feadc5.jpg",
-    "static/media/hacker.png": "/static/media/hacker.8722ca4b7ed9fbc19cc8.png",
-    "index.html": "/index.html",
-    "main.5db727e4.css.map": "/static/css/main.5db727e4.css.map",
-    "main.44f05885.js.map": "/static/js/main.44f05885.js.map"
+    "main.css": "/OlhaNovik.github.io/static/css/main.5db727e4.css",
+    "main.js": "/OlhaNovik.github.io/static/js/main.69fd4db7.js",
+    "static/media/Cv_photo.jpg": "/OlhaNovik.github.io/static/media/Cv_photo.48d286511cb788feadc5.jpg",
+    "static/media/hacker.png": "/OlhaNovik.github.io/static/media/hacker.8722ca4b7ed9fbc19cc8.png",
+    "index.html": "/OlhaNovik.github.io/index.html",
+    "main.5db727e4.css.map": "/OlhaNovik.github.io/static/css/main.5db727e4.css.map",
+    "main.69fd4db7.js.map": "/OlhaNovik.github.io/static/js/main.69fd4db7.js.map"
   },
   "entrypoints": [
     "static/css/main.5db727e4.css",
-    "static/js/main.44f05885.js"
+    "static/js/main.69fd4db7.js"
   ]
 }
