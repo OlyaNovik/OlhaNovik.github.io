@@ -100,7 +100,7 @@ const SignUp = (props) => {
             />
             <TextField
           id="outlined-password-input"
-          label="Password"
+          label="Required"
           type="password"
           autoComplete="current-password"
           value={formValue.password}

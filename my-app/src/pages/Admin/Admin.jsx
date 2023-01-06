@@ -1,18 +1,18 @@
 import "../HomeCv/HomeCv.scss"
 import "./Admin.scss"
 import db, { storage } from "../../Firebase"
-import Cv_photo from "../../Image/Cv_photo.jpg"
 import { addDoc, collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import {useDispatch, useSelector} from "react-redux";
-import { async } from "@firebase/util";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import {InfoAction} from '../../Redux/Action/Action'
 import {InfoUser} from './InfoUser'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
-import { getInfoUser} from '../../Redux/Action/Action'
+// import { getInfoUser} from '../../Redux/Action/Action'
 const Admin = () => {
    
   const dispatch = useDispatch()
@@ -22,10 +22,12 @@ const Admin = () => {
   const [editMode, setEdit] = useState(false)
   const [editValue, setEditValues] = useState(InfoUser)
   const [load,setLoad] =useState(false)
+  const [add, setAddInfo] =useState(true)
 
   const addInfo = async () => {
     try {
       const docRef = await addDoc(collectionRef, infoValue)
+      setAddInfo(false)
     }
     catch (e) {
       console.log(e);
@@ -72,25 +74,34 @@ const Admin = () => {
           mainText : info.education.mainText,
           title2: info.education.title2,
           mainText2: info.education.mainText2,
-      }
+      },
+      image: info.image,
       })
     }
     catch (e) {
       console.log(e);
     }
   }
-  //  const handleUpload = (e)=>{
-  //     const StorageRef = ref(storage,`/images/${e.target.files[0].name}`)
-  //     const  uploadData = uploadBytesResumable(StorageRef, e.target.files[0])
-  //     uploadData.on("state_changed",(snapshot)=>{
-  //       const PROG = ((snapshot.bytesTransferred/snapshot.totalBytes)*100)
-  //       console.log(PROG);
-  //     },(err)=> console.log(err),()=>{
-  //       getDownloadURL(uploadData.snapshot.ref)
-  //       .then(url=> console.log(url))
-  //     })
 
-  //   }
+   const handleUpload = (e)=>{
+      const StorageRef = ref(storage,`/images/${e.target.files[0].name}`)
+      const  uploadData = uploadBytesResumable(StorageRef, e.target.files[0])
+      uploadData.on("state_changed",(snapshot)=>{
+        const PROG = ((snapshot.bytesTransferred/snapshot.totalBytes)*100)
+        console.log(PROG);
+      },(err)=> console.log(err),()=>{
+        getDownloadURL(uploadData.snapshot.ref)
+        .then(url => {
+          setEditValues({
+              ...editValue,
+              image: url,
+              imageName: e.target.files[0].name
+          })
+      })
+})
+
+}
+
 
   const handleEditMode = ()=>{
     setEdit((prev)=>!prev)
@@ -99,7 +110,9 @@ const Admin = () => {
   }
   const handleSave = () => {
     addInfo();
-    setLoad(prev=>!prev)
+    if(add === false){
+      setLoad(prev=>!prev) 
+    }
   }
   const handleInputChange = (obj, key, value) => {
     setEditValues({
@@ -125,7 +138,7 @@ const Admin = () => {
       {!  editMode ?
       <div className="globalBlock">
         <div className="Cv">
-          <img className="img_av" src={Cv_photo} alt="#" />
+          <img className="img_av" src={user[0]?.image} alt="#" />
           <div className="headerCv">
             <div className="title_Haeder">
               <p className="p1">{user[0]?.mainInfo.fullName}</p>
@@ -171,8 +184,9 @@ const Admin = () => {
       <>
         <div className="globalBlock">
         <div className="Cv">
-          <img className="img_av" src={Cv_photo} alt="#" />
+          <img className="img_av" src={user[0]?.image} alt="#" />
           <div className="headerCv">
+          
             <div className="title_Haeder">
               {/* <p className="p1">{user[0]?.mainInfo.fullName}</p> */}
               <TextField 
@@ -204,8 +218,14 @@ const Admin = () => {
                       onChange={(e)=>handleInputChange('mainInfo',"about", e.target.value)}
                     />
               </div>
+             
             </div>
+            
           </div>
+          <IconButton onChange={handleUpload} color="primary" aria-label="upload picture" component="label">
+                <input hidden accept="image/*" type="file" />
+                <PhotoCamera />
+              </IconButton>
           <div className="main_Cv">
             <div className="skills">
               <p className="s2">Skills</p>

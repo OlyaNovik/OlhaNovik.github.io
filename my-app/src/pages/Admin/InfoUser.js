@@ -23,6 +23,7 @@ export const InfoUser = {
         mainText : 'Faculty of Electronics and Computer Sciences. Specialization Computer science.',
         title2: ["LOGOS IT ACADEMY", "PRACTICAL COURSE OF WEB DEVELOPMENT"],
         mainText2: '6-month web development course, namely Front-end Developer.'
-    }
-    
+    },
+    image: "https://firebasestorage.googleapis.com/v0/b/projectcv-eb5a1.appspot.com/o/images%2Fphoto_2022-08-19_16-22-38.jpg?alt=media&token=04eed20f-587d-4136-9c7f-fc614e783d8c",
+    imageName: "Cv",
 }
