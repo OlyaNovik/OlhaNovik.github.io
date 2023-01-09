@@ -8,7 +8,6 @@ import Admin from "./pages/Admin/Admin";
 import ErrorPage from "./pages/ErrorPage";
 
 function App() {
-  const admin = localStorage.getItem('user');
   return (
     <div className="App">
      <BrowserRouter>

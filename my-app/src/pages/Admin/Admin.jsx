@@ -20,9 +20,15 @@ const Admin = () => {
   const collectionRef = collection(db, 'info')
   const [infoValue, setInfoValue] = useState(InfoUser)
   const [editMode, setEdit] = useState(false)
+  const [title, setTitle] =useState(true)
   const [editValue, setEditValues] = useState(InfoUser)
   const [load,setLoad] =useState(false)
   const [add, setAddInfo] =useState(true)
+  const [editNewValue,setValue] = useState({
+    skill: '',
+    workExperience: '',
+    contact: '',
+  })
 
   const addInfo = async () => {
     try {
@@ -33,19 +39,18 @@ const Admin = () => {
       console.log(e);
     }
   }
+  
   const getInfo = () => {
     onSnapshot(collectionRef, (snapshot) => {
     dispatch(InfoAction.SetInfo(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))))
     })
   }
+
+
   useEffect(() => {
     getInfo();
-    
   }, [])
 
-  // useEffect(() => {
-  //   user?.length > 0 && console.log(user[0]);
-  // }, [user])
 
   // const deleteUser = async (userId) => {
   //   const DocRef = doc(db, collectionRef, userId)
@@ -106,7 +111,6 @@ const Admin = () => {
   const handleEditMode = ()=>{
     setEdit((prev)=>!prev)
     EditUser(editValue)
-
   }
   const handleSave = () => {
     addInfo();
@@ -115,23 +119,80 @@ const Admin = () => {
     }
   }
   const handleInputChange = (obj, key, value) => {
-    setEditValues({
+    if(obj === 'mainInfo'){
+      setEditValues({
         ...editValue,
-          [obj]: {
-            ...editValue[obj],
-            [key]: value,
-          },
+          mainInfo: {
+            ...editValue.mainInfo,
+            [key]:value
+          }
     })
+    }
+    if(obj === 'education'){
+      setEditValues({
+        ...editValue,
+          education: {
+            ...editValue.education,
+            [key]:value
+          }
+    })
+    }
+    
     console.log(editValue);
+    
 };
+  const handleEditValue = (key,value)=>{
+    setValue({
+      [key]:value,
+    })
+    setTitle(false)
+    console.log(editNewValue);
+    // if(key === 'skill'){
+    //   setEditValues({
+    //     ...editValue,
+    //       skills:[],
+    // })
+    // }
+    if(key === 'contact'){
+      setEditValues({
+        ...editValue,
+          contact: [],
+    })
+    }
+    if(key === 'workExperience'){
+      setEditValues({
+        ...editValue,
+          workExperience: [],
+    })
+    }
+    console.log(editValue);
+   
+  } 
 
+  const handlePush =(key)=>{
+    setValue({
+      skill:'',
+      contact: '',
+      workExperience: ''
+    })
+    if(key === 'skill'){
+      editValue.skills.push(editNewValue.skill)
+    }
+    if(key === 'contact'){
+      editValue.contact.push(editNewValue.contact)
+    }
+    if(key === 'work'){
+    editValue.workExperience.push(editNewValue.workExperience)
+    }
+    
+    console.log('edit value', editValue);
+  }
 
   const label = { inputProps: { 'aria-label': 'Color switch demo' } };
   return (
     <>
     <div className="group_button">
     <Button disabled={load} onClick={handleSave} variant="contained" color="warning"> Load</Button>
-      {/* <button >Save</button> */}
       <Switch onClick={handleEditMode} {...label} color="warning" />
       <label htmlFor="">Edit mode</label>
     </div>
@@ -166,13 +227,19 @@ const Admin = () => {
               <p className="s2">EDUCATION</p>
               <div className="univ_bl">
                 <div className="univ">
-                  <p className="s1">{user[0]?.education["title1"][0]}</p>
-                  <p>{user[0]?.education["title1"][1]}</p>
+                  {title ? <p className="s1">{user[0]?.education["title1"]}</p> 
+                  :
+                  <><p className="s1">{user[0]?.education["title1"][0]}</p>
+                  <p>{user[0]?.education["title1"][1]}</p></>
+                  }
                   <p className="text_o">{user[0]?.education["mainText"]}</p>
                 </div>
                 <div className="course">
-                  <p className="s1" >{user[0]?.education["title2"][0]}</p>
-                  <p className="s1" >{user[0]?.education["title2"][1]}</p>
+                {title ? <p className="s1">{user[0]?.education["title2"]}</p> 
+                  :
+                  <><p className="s1">{user[0]?.education["title2"][0]}</p>
+                  <p>{user[0]?.education["title2"][1]}</p></>
+                  }
                   <p className="text_o" >{user[0]?.education["mainText2"]}</p>
                 </div>
               </div>
@@ -193,15 +260,15 @@ const Admin = () => {
               color ="warning"
               className="input_text"
               id="standard-basic"
-              label="Name"
+              value={editValue?.mainInfo.fullName}
               variant="standard"
               onChange={(e)=>handleInputChange('mainInfo','fullName', e.target.value)}
                />
               {/* <p className="p2">{user[0]?.mainInfo.position}</p> */}
               <TextField  
               color ="warning" 
+              value={editValue?.mainInfo.position}
               id="standard-basic" 
-              label="Position" 
               variant="standard"
               onChange={(e)=>handleInputChange('mainInfo',"position", e.target.value)} 
               />
@@ -211,7 +278,7 @@ const Admin = () => {
                     <TextField
                       className="area"
                       id="standard-textarea"
-                      label="About me"
+                      value={editValue?.mainInfo.about}
                       color ="warning"
                       multiline
                       variant="standard"
@@ -229,51 +296,49 @@ const Admin = () => {
           <div className="main_Cv">
             <div className="skills">
               <p className="s2">Skills</p>
-            {
-              user[0]?.skills.map((el, index) =>
-              <li className="list" key={index*3 + el}>
-                <TextField
+           <li className="list_edit">
+            <TextField
                       className="area"
                       id="standard-textarea"
-                      label="Skills"
+                      value={editNewValue.skill}
+                      // label="Skill"
                       color ="warning"
                       multiline
                       variant="standard"
-                      onChange={(e)=>handleInputChange('skills',index, e.target.value)}
-                    /></li>)}
-               {/* {user[{0]?.skills.map((el, index) => <li className="list" key={index + el}>{el}</li>)}  */}
+                      onChange={(e)=>handleEditValue('skill', e.target.value)} 
+              /> 
+              <Button className="list_btn" onClick={()=>handlePush('skill')} variant="contained" color="warning"> Add</Button>
+               </li> 
             </div>
             <div className="experience">
               <p className="s2">WORK EXPERIENCE</p>
-              {
-              user[0]?.workExperience.map((el, index) =>
-              <li className="list" key={index*7+3 + el}>
-                <TextField
+              <li className="list_edit">
+            <TextField
                       className="area"
                       id="standard-textarea"
-                      label="Work"
+                      value={editNewValue.workExperience}
                       color ="warning"
                       multiline
                       variant="standard"
-                      onChange={(e)=>handleInputChange('workExperience',index, e.target.value)}
-                    /></li>)}
-              {/* {user[0]?.workExperience.map((el, index) => <li className="list" key={(index + el) * 2 / 3}>{el}</li>)} */}
+                      onChange={(e)=>handleEditValue('workExperience', e.target.value)} 
+              /> 
+              <Button className="list_btn"  onClick={()=>handlePush("work")} variant="contained" color="warning"> Add</Button>
+               </li> 
             </div>
             <div className="contact">
               <p className="s2" >CONTACT INFORMATION</p>
-              {
-              user[0]?.contact.map((el, index) =>
-              <li className="list" key={index*2 + el}>
-                <TextField
+              <li className="list_edit">
+            <TextField
                       className="area"
                       id="standard-textarea"
-                      label="Contact"
+                      value={editNewValue.contact}
                       color ="warning"
                       multiline
                       variant="standard"
-                      onChange={(e)=>handleInputChange('contact', index, e.target.value)}
-                    /></li>)}
-              {/* {user[0]?.contact.map((el, index) => <li className="list" key={el + index}>{el}</li>)} */}
+                      onChange={(e)=>handleEditValue('contact', e.target.value)} 
+              /> 
+              <Button className="list_btn" onClick={()=>handlePush('contact')} variant="contained" color="warning"> Add</Button>
+               </li> 
             </div>
             <div className="education">
               <p className="s2">EDUCATION</p>
@@ -282,47 +347,44 @@ const Admin = () => {
                 <TextField
                       className="area"
                       id="standard-textarea"
-                      label="title one"
+                      value={editValue.education['title1']}
                       color ="warning"
                       multiline
                       variant="standard"
                       onChange={(e)=>handleInputChange('education','title1', e.target.value)}
                     />
-                  {/* <p className="s1">{user[0]?.education["title1"][0]}</p> */}
-                  {/* <p>{user[0]?.education["title1"][1]}</p> */}
+
                   <TextField
                       className="area"
                       id="standard-textarea"
-                      label="Main text"
+                      value={editValue.education['mainText']}
                       color ="warning"
                       multiline
                       variant="standard"
                       onChange={(e)=>handleInputChange('education','mainText', e.target.value)}
                     />
-                  {/* <p className="text_o">{user[0]?.education["mainText"]}</p> */}
+
                 </div>
                 <div className="course">
                <TextField
                       className="area"
                       id="standard-textarea"
-                      label="title two"
+                      value={editValue.education['title2']}
                       color ="warning"
                       multiline
                       variant="standard"
                       onChange={(e)=>handleInputChange('education','title2', e.target.value)}
                     />
-                  {/* <p className="s1" >{user[0]?.education["title2"][0]}</p> */}
-                  {/* <p className="s1" >{user[0]?.education["title2"][1]}</p> */}
+
                   <TextField
                       className="area"
                       id="standard-textarea"
-                      label="Main text"
                       color ="warning"
+                      value={editValue.education['mainText2']}
                       multiline
                       variant="standard"
                       onChange={(e)=>handleInputChange('education','mainText2', e.target.value)}
                     />
-                  {/* <p className="text_o" >{user[0]?.education["mainText2"]}</p> */}
                 </div>
               </div>
             </div>
