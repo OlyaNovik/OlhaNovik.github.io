@@ -32,6 +32,8 @@ const Admin = () => {
     contact: '',
   })
 
+
+  
   // const getInfoSnap = ()=> dispatch(getInfoUserThunk)
 
   const addInfo = async () => {
@@ -155,7 +157,7 @@ const Admin = () => {
       contact: []
     })
   }, [effect])
-  
+
   const handleEditValue = (key, value) => {
     setValue({
       [key]: value,
