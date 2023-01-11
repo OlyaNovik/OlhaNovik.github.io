@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/HeaderLoyaut/Layout";
 import Home from "./pages/HomeCv/Home";
 import SignUp from "./pages/Sign/SignUp";
@@ -10,7 +10,7 @@ import ErrorPage from "./pages/ErrorPage";
 function App() {
   return (
     <div className="App">
-     <BrowserRouter>
+     <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home/>} />
@@ -21,7 +21,8 @@ function App() {
         </Route>
 
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
+    
     </div>
   );
 }

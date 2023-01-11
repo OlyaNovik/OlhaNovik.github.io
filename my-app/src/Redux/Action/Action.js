@@ -7,7 +7,7 @@ export const InfoAction = {
 
 
 
-export const getInfoUserThunk = () => (dispatch,snapshot) => {
+export const getInfoUserThunk = (snapshot) => (dispatch) => {
     dispatch(InfoAction.SetInfo(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))))
 
 }
