@@ -56,7 +56,7 @@ const Admin = () => {
 
   useEffect(() => {
     getInfo();
-  }, [])
+  }, [load])
 
 
   // const deleteUser = async (userId) => {
@@ -187,6 +187,18 @@ const Admin = () => {
     console.log('edit value', editValue);
   }
 
+  const handleDelete = (key)=>{
+    if (key === 'skill') {
+      editValue.skills.pop()
+    }
+    if (key === 'contact') {
+      editValue.contact.pop()
+    }
+    if (key === 'work') {
+      editValue.workExperience.pop()
+    }
+    console.log("editdeete",editValue);
+  }
   const label = { inputProps: { 'aria-label': 'Color switch demo' } };
   return (
     <>
@@ -308,6 +320,11 @@ const Admin = () => {
                     />
                     <Button className="list_btn" onClick={() => handlePush('skill')} variant="contained" color="warning"> Add</Button>
                   </li>
+                  
+                  {editValue?.skills ? <Button className="list_btn" onClick={() => handleDelete('skill')} variant="contained" color="warning"> Delete</Button>
+                : <li></li>
+                }
+                {editValue?.skills.map((el, index) => <li className="list" key={index*9 + el}>{el}</li>)}
                 </div>
                 <div className="experience">
                   <p className="s2">WORK EXPERIENCE</p>
@@ -323,6 +340,10 @@ const Admin = () => {
                     />
                     <Button className="list_btn" onClick={() => handlePush("work")} variant="contained" color="warning"> Add</Button>
                   </li>
+                  {editValue?.workExperience.map((el, index) => <li className="list" key={index*9 + el}>{el}</li>)}
+                  {editValue?.workExperience ? <Button className="list_btn" onClick={() => handleDelete('work')} variant="contained" color="warning"> Delete</Button>
+                : <li></li>
+                }
                 </div>
                 <div className="contact">
                   <p className="s2" >CONTACT INFORMATION</p>
@@ -338,6 +359,10 @@ const Admin = () => {
                     />
                     <Button className="list_btn" onClick={() => handlePush('contact')} variant="contained" color="warning"> Add</Button>
                   </li>
+                  {editValue?.contact.map((el, index) => <li className="list" key={index*9 + el}>{el}</li>)}
+                  {editValue?.contact ? <Button className="list_btn" onClick={() => handleDelete('contact')} variant="contained" color="warning"> Delete</Button>
+                : <li></li>
+                }
                 </div>
                 <div className="education">
                   <p className="s2">EDUCATION</p>
