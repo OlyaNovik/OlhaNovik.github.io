@@ -321,10 +321,10 @@ const Admin = () => {
                     <Button className="list_btn" onClick={() => handlePush('skill')} variant="contained" color="warning"> Add</Button>
                   </li>
                   
+                  {editValue?.skills.map((el, index) => <li className="list" key={index*9 + el}>{el}</li>)}
                   {editValue?.skills ? <Button className="list_btn" onClick={() => handleDelete('skill')} variant="contained" color="warning"> Delete</Button>
                 : <li></li>
                 }
-                {editValue?.skills.map((el, index) => <li className="list" key={index*9 + el}>{el}</li>)}
                 </div>
                 <div className="experience">
                   <p className="s2">WORK EXPERIENCE</p>
